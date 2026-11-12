@@ -1,0 +1,11 @@
+function required(name: string, value: string | undefined): string {
+  if (!value) throw new Error(`Missing ${name}. Copy admin/.env.example to admin/.env and fill it in.`)
+  return value
+}
+
+export const env = {
+  apiUrl: required('VITE_API_URL', import.meta.env.VITE_API_URL).replace(/\/$/, ''),
+  siteUrl: (import.meta.env.VITE_SITE_URL ?? '').replace(/\/$/, ''),
+  supabaseUrl: required('VITE_SUPABASE_URL', import.meta.env.VITE_SUPABASE_URL),
+  supabaseAnonKey: required('VITE_SUPABASE_ANON_KEY', import.meta.env.VITE_SUPABASE_ANON_KEY),
+}
